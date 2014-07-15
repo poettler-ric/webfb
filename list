@@ -6,8 +6,12 @@
 <form action="/defaultaction" method="post">
 {{ $prefix := print .Path .Separator }}
 <select name="path" size="30" style="width: 500px" autofocus>
-<option value="{{ print $prefix ".." }}">..</option>
-{{ range .Entries }}<option value="{{ print $prefix .Name }}">{{ .Name }}</option>{{ end }}
+<option value="{{ print $prefix ".." }}">d&ensp;..</option>
+{{ range .Entries }}
+<option value="{{ print $prefix .Name }}">
+  {{ if .IsDirectory }}d&ensp;{{ else }}&ensp;&ensp;{{ end }}{{ .Name }}
+</option>
+{{ end }}
 </select>
 <input value="run" type="submit"/>
 </form>
