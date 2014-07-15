@@ -2,6 +2,7 @@ package main
 
 import (
     "encoding/json"
+    "fmt"
     "io/ioutil"
     "log"
     "os"
@@ -130,11 +131,13 @@ func FileBrowserListDirectory(w http.ResponseWriter, r *http.Request) {
     
     template, err := template.ParseFiles("list")
     if err != nil {
-	log.Fatal(err)
+	fmt.Fprintf(w, "error while parsing the template: %s\n", err)
+	return
     }
     err = template.Execute(w, directory)
     if err != nil {
-	log.Fatal(err)
+	fmt.Fprintf(w, "error while executing the template: %s\n", err)
+	return
     }
 }
 
