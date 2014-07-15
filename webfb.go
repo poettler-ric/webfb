@@ -75,6 +75,8 @@ func FileBrowserDefaultAction(w http.ResponseWriter, r *http.Request) {
 	    }
 	}
     }
+
+    // by default we list the directory containing the file we tried to hanled
     http.Redirect(w, r, "/list?path=" + filepath.Dir(path), http.StatusFound)
 }
 
