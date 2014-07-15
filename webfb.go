@@ -122,12 +122,17 @@ func FileBrowserListDirectory(w http.ResponseWriter, r *http.Request) {
     if path == "" {
 	path = GetDefaultLisingPath()
     }
-
-    log.Printf("listing: %s\n", path)
-
-    directory, err := GetDirectory(path)
+    absolute, err := filepath.Abs(path)
     if err != nil {
-	http.Redirect(w, r, "/list?path=" + filepath.Dir(path), http.StatusFound)
+	fmt.Fprintf(w, "error while getting the absolute path for %s: %s\n", err)
+	return
+    }
+
+    log.Printf("listing: %s\n", absolute)
+
+    directory, err := GetDirectory(absolute)
+    if err != nil {
+	http.Redirect(w, r, "/list?path=" + filepath.Dir(absolute), http.StatusFound)
 	return
     }
     
