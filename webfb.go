@@ -3,12 +3,12 @@ package main
 import (
     "encoding/json"
     "fmt"
+    "html/template"
     "io/ioutil"
     "log"
+    "net/http"
     "os"
     "os/exec"
-    "html/template"
-    "net/http"
     "path/filepath"
 )
 
