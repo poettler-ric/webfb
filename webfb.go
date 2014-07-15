@@ -7,7 +7,6 @@ import (
     "log"
     "os"
     "os/exec"
-//    "os/user"
     "html/template"
     "net/http"
     "path/filepath"
@@ -149,18 +148,6 @@ func FileBrowserListDirectory(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-    /*cwd, err := filepath.Abs(filepath.Dir(os.Args[0]))
-    if err != nil {
-	log.Fatal(err)
-    }
-    fmt.Println("cwd:", cwd)*/
-
-    /*user, err := user.Current()
-    if err != nil {
-	log.Fatal(err)
-    }
-    configFile := filepath.Join(user.HomeDir, RcFile)*/
-
     configFile := RcFile
     if _, err := os.Stat(configFile); err == nil {
 	configContent, err := ioutil.ReadFile(configFile)
