@@ -58,7 +58,7 @@ func FileBrowserDefaultAction(w http.ResponseWriter, r *http.Request) {
 	    matched, err := filepath.Match(entry.Pattern, base)
 	    if err != nil {
 		log.Print(err)
-		return
+		break
 	    }
 	    if matched {
 		cmd := exec.Command(entry.Command, path)
