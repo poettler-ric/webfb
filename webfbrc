@@ -1,0 +1,12 @@
+{
+    "DefaultActions": [
+	{
+	    "Pattern": "*.go",
+	    "Command": "gedit"
+	},
+	{
+	    "Pattern": "*.mp4",
+	    "Command": "mpv"
+	}
+    ]
+}
