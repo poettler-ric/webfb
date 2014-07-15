@@ -17,7 +17,12 @@ const RcFile = "webfbrc"
 var config Configuration
 
 type Configuration struct {
+    FileBrowser FileBrowserConfiguration
     DefaultActions []DefaultAction
+}
+
+type FileBrowserConfiguration struct {
+    DefaultPath string
 }
 
 type DefaultAction struct {
@@ -90,9 +95,31 @@ func GetDirectory(path string) (*Directory, error) {
     return result, nil
 }
 
+func GetDefaultLisingPath() string {
+    // the the configured default path
+    if config.FileBrowser.DefaultPath != "" {
+	return config.FileBrowser.DefaultPath
+    }
+
+    // try the executeable's directory
+    bindir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+    if err != nil {
+	log.Printf("Error while determining the executeable's directory: %s\n", err)
+    } else {
+	return bindir
+    }
+
+    // use the current working directory
+    return "."
+}
+
 func FileBrowserListDirectory(w http.ResponseWriter, r *http.Request) {
     path := r.FormValue("path")
-    // TODO: check for a valid path
+
+    if path == "" {
+	path = GetDefaultLisingPath()
+    }
+
     log.Printf("listing: %s\n", path)
 
     directory, err := GetDirectory(path)

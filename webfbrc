@@ -1,4 +1,7 @@
 {
+    "FileBrowser": {
+        "DefaultPath": "/home"
+    },
     "DefaultActions": [
 	{
 	    "Pattern": "*.go",
