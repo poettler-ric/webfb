@@ -136,6 +136,7 @@ func main() {
 	}
     }
 
+    http.HandleFunc("/", FileBrowserListDirectory)
     http.HandleFunc("/list", FileBrowserListDirectory)
     http.HandleFunc("/defaultaction", FileBrowserDefaultAction)
     http.ListenAndServe("localhost:4000", nil)
